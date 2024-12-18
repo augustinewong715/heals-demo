@@ -24,9 +24,13 @@ This project uses Terraform to:
 ## Project Setup Instructions
 
 ### 1. Clone the Repository
-
+```
 git clone https://github.com/augustinewong715/heals-demo
+```
+
+```
 cd hello-world-eks
+```
 
 ### 2. Configure Variables
 Update variables.tf:
@@ -38,17 +42,23 @@ Set hosted_zone_id to your Route53 hosted zone ID.
 
 ### 3. Initialize Terraform
 
+```
 terraform init
+```
 
 ### 4. Review the Plan
 
+```
 terraform plan
+```
 
 Ensure all resources are planned as expected.
 
 ### 5. Apply the Configuration
 
+```
 terraform apply
+```
 
 Type yes when prompted to confirm the changes.
 
@@ -60,6 +70,6 @@ Note: The EKS cluster creation can take up to 25 minutes.
 
 ### Access the Application Open your web browser and navigate to the Ingress URL appended with /hello. For example:
 
-http://<cluster-endpoint>/hello
+http://cluster-endpoint/hello
 
 You should see the "Hello World" page served by the application.
