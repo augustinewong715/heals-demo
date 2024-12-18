@@ -53,7 +53,7 @@ resource "aws_route_table_association" "demo" {
 
 # IAM Role for EKS Cluster
 resource "aws_iam_role" "eks_cluster" {
-  name               = "eks-cluster-role"
+  name               = "eks-cluster-assume-role"
   assume_role_policy = data.aws_iam_policy_document.eks_cluster_assume_role.json
 }
 
@@ -125,7 +125,7 @@ resource "aws_iam_role_policy_attachment" "eks_node_AmazonEKS_CNI_Policy" {
 }
 
 # EKS Node Group
-resource "aws_eks_node_group" "demo" {
+resource "aws_eks_node_group" "demo_group" {
   cluster_name    = aws_eks_cluster.demo.name
   node_group_name = "demo-node-group"
   node_role_arn   = aws_iam_role.eks_node.arn
@@ -151,9 +151,9 @@ depends_on = [
 #######################
 
 # Kubernetes Namespace
-resource "kubernetes_namespace" "demo" {
+resource "kubernetes_namespace" "demons" {
   metadata {
-    name = "demo"
+    name = "demons"
   }
 }
 
@@ -161,7 +161,7 @@ resource "kubernetes_namespace" "demo" {
 resource "kubernetes_deployment" "hello_world" {
   metadata {
     name      = "hello-world"
-    namespace = kubernetes_namespace.demo.metadata[0].name
+    namespace = kubernetes_namespace.demons.metadata[0].name
     labels = {
       app = "hello-world"
     }
@@ -197,7 +197,7 @@ resource "kubernetes_deployment" "hello_world" {
 resource "kubernetes_service" "hello_world" {
   metadata {
     name      = "hello-world-service"
-    namespace = kubernetes_namespace.demo.metadata[0].name
+    namespace = kubernetes_namespace.demons.metadata[0].name
   }
 
   spec {
@@ -215,7 +215,7 @@ resource "kubernetes_service" "hello_world" {
 resource "kubernetes_ingress_v1" "hello_world" {
   metadata {
     name      = "hello-world-ingress"
-    namespace = kubernetes_namespace.demo.metadata[0].name
+    namespace = kubernetes_namespace.demons.metadata[0].name
     annotations = {
       "kubernetes.io/ingress.class" = "nginx"
     }
@@ -267,6 +267,8 @@ data "kubernetes_service" "nginx_ingress" {
     name      = "nginx-ingress-ingress-nginx-controller"
     namespace = "kube-system"
   }
+
+  depends_on = [helm_release.nginx_ingress]
 }
 
 # Get the current AWS region
