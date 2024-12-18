@@ -5,7 +5,6 @@
 This project uses Terraform to:
 
 - Deploy an AWS EKS (Elastic Kubernetes Service) cluster.
-- Set up a VPC with public and private subnets.
 - Deploy a "Hello World" web application using Kubernetes resources (Deployment, Service).
 - Set up Kubernetes Ingress to expose the application externally.
 - Optionally use a custom domain purchased from Namecheap and configure DNS with Route53.
