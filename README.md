@@ -25,8 +25,7 @@ This project uses Terraform to:
 
 ### 1. Clone the Repository
 
-```bash
-git clone <your-repo-url>
+git clone https://github.com/augustinewong715/heals-demo
 cd hello-world-eks
 
 ### 2. Configure Variables
@@ -38,19 +37,16 @@ Set domain_name to your custom domain (e.g., "example.com").
 Set hosted_zone_id to your Route53 hosted zone ID.
 
 ### 3. Initialize Terraform
-```bash
 
 terraform init
 
 ### 4. Review the Plan
-```bash
 
 terraform plan
 
 Ensure all resources are planned as expected.
 
 ### 5. Apply the Configuration
-```bash
 
 terraform apply
 
@@ -58,10 +54,11 @@ Type yes when prompted to confirm the changes.
 
 Note: The EKS cluster creation can take up to 25 minutes.
 
-Testing the Application
-Retrieve the Ingress URL After deployment, obtain the Ingress URL from the Terraform outputs.
+## Testing the Application
 
-Access the Application Open your web browser and navigate to the Ingress URL appended with /hello. For example:
+### Retrieve the Ingress URL After deployment, obtain the Ingress URL from the Terraform outputs.
+
+### Access the Application Open your web browser and navigate to the Ingress URL appended with /hello. For example:
 
 http://<cluster-endpoint>/hello
 
