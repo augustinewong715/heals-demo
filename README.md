@@ -29,7 +29,7 @@ git clone https://github.com/augustinewong715/heals-demo
 ```
 
 ```
-cd hello-world-eks
+cd heals-demo
 ```
 
 ### 2. Configure Variables
